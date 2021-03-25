@@ -1,0 +1,109 @@
+<template>
+<Lightning-card title="Brand Class Offtake" icon-name="standard:account">
+    <template if:true={monthYearError}>
+            <p class="slds-align_absolute-center"><b style="color:red">{monthYearErrorMessage}</b></p>
+    </template>
+    <template if:true={applicationError}>
+        <p class="slds-align_absolute-center"><b style="color:red">{applicationErrorMessage}</b></p>
+    </template>
+    <template if:true={brandError}>
+        <p class="slds-align_absolute-center"><b style="color:red">{brandErrorMessage}</b></p>
+    </template>
+    <template if:true={tyreClassError}>
+        <p class="slds-align_absolute-center"><b style="color:red">{tyreClassErrorMessage}</b></p>
+    </template>
+    <template if:true={tyrePatternError}>
+        <p class="slds-align_absolute-center"><b style="color:red">{tyrePatternErrorMessage}</b></p>
+    </template>
+    <template if:true={offTakeError}>
+        <p class="slds-align_absolute-center"><b style="color:red">{offTakeErrorMessage}</b></p>
+    </template>
+    <template if:true={indirectFleetDealerError}>
+        <p class="slds-align_absolute-center"><b style="color:red">{indirectFleetDealerErrorMessage}</b></p>
+    </template>
+    
+
+
+<table class="slds-table slds-table_cell-buffer slds-table_bordered tab slds-scrollable">
+    <thead>
+        <tr class="slds-line-height_reset">
+        <th class="" scope="col">
+            <div class="slds-truncate" title="Month/Year">Month/Year</div>
+        </th>
+        <th class="" scope="col">
+            <div class="slds-truncate" title="Application">Application</div>
+        </th>
+        <th class="" scope="col">
+            <div class="slds-truncate" title="Brand">Brand</div>
+        </th>
+        <th class="" scope="col">
+            <div class="slds-truncate" title="Class">Class</div>
+        </th>
+        <th class="" scope="col">
+            <div class="slds-truncate" title="Tyre Pattern">Tyre Pattern</div>
+        </th>
+        <th class="" scope="col">
+            <div class="slds-truncate" title="Offtake">Offtake</div>
+        </th>
+        <template if:true={showIndirectFleetDealer}>
+            <th class="" scope="col">
+                <div class="slds-truncate" title="Indirect Fleet Dealer">Indirect Fleet Dealer</div>
+            </th>
+       </template>
+        </tr>
+        </thead>
+<tbody>
+    <!--<template for:each={data} for:item="dataVal">-->
+        <!--<template iterator:it={listOfRecords}>-->
+        <template for:each={listOfRecords} for:item="it" for:index="index">
+        <tr class="inputRows" key={it.id}>
+            <td>
+                <lightning-combobox class="fields" label="monthYear" variant="label-hidden" name={index}  value={value} options={it.monthYear} onchange={handleChange}></lightning-combobox>
+            </td>
+            <td>
+                <lightning-combobox class="fields" label="application" variant="label-hidden" name={index}  value={value} options={it.application} onchange={handleChange}></lightning-combobox>
+            </td>
+            <td>
+                <lightning-combobox class="fields" label="brand" variant="label-hidden" name={index}  value={it.brand} options={it.brand} onchange={handleBrandChange}></lightning-combobox>
+            </td>
+            <td>
+                <lightning-combobox class="fields" label="tyreClass" variant="label-hidden" name={index}  value={it.tyreClass} options={it.tyreClass} onchange={handleTyreClassChange}></lightning-combobox>
+            </td>
+            <td>
+                <lightning-combobox class="fields" label="tyrePattern" variant="label-hidden" name={index}  value={value} options={it.tyrePattern} onchange={handleChange}></lightning-combobox>
+            </td>
+            <td>
+                <lightning-input class="fields" label="offTake" variant="label-hidden" type="number" name={index} value={it.offTake} ></lightning-input>
+            </td>
+            <template if:true={showIndirectFleetDealer}>
+                <td>
+                    <lightning-combobox class="fields" label="indirectFleetDealer" variant="label-hidden" name={index}  value={value} options={it.indirectFleetDealer} onchange={handleChange}></lightning-combobox>
+                </td>
+            </template>
+            <td>
+                <!--<template if:true={it.first}>-->
+                    {it.id}
+                    <lightning-button name={index} access-key={it.id} id={index} variant="brand" label="Add" title="Add" onclick={AddNewRow}></lightning-button>
+                <!--</template>-->
+                <!--<template if:false={it.first}>-->
+                    <lightning-button name={index} access-key={it.id} id={index} variant="brand" label="Delete" title="Delete" onclick={removeRow}></lightning-button>
+                <!--</template>-->
+                    <lightning-button name={index} access-key={it.id} id={index} variant="brand" label="Clone" title="Clone" onclick={cloneRow}></lightning-button>
+
+
+            </td>
+        </tr>
+
+    </template>
+
+</tbody>
+</table>
+<div class="slds-align_absolute-center slds-p-around_medium" style="height:5rem;position:stikcy">
+    <lightning-button variant="brand" label="Save" title="Save" onclick={save} class="slds-m-left_x-small"></lightning-button>
+    <lightning-button variant="brand" label="Cancel" title="Cancel" onclick={Cancel} class="slds-m-left_x-small"></lightning-button>
+
+</div>
+
+</Lightning-card>
+
+</template>
